@@ -52,6 +52,7 @@ const Portfolio = () => {
         <section id="portfolio-container">
 
             <section id="purchase-container">
+            <header>${currentUser.balance}</header>
             <input 
                 type="text" 
                 id="ticker-input" 

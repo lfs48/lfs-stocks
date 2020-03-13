@@ -10,20 +10,20 @@ const Portfolio = () => {
 
     const [state, setState] = useState({
         ticker: "",
-        quantity: ""
+        quantity: "",
     });
 
     const dispatch = useDispatch();
 
     const {stocks, currentUser} = useSelector(
         state => ({
-            stocks: state.entities.stocks,
-            currentUser: state.entities.users[state.sessions.id]
+            currentUser: state.entities.users[state.sessions.id],
+            stocks: state.entities.stocks
         })
     )
 
     useEffect( () => {
-        dispatch(fetchUserStocks(currentUser.id));
+        dispatch(fetchUserStocks(currentUser.id))
     },
     []);
 
@@ -36,6 +36,7 @@ const Portfolio = () => {
 
     const handleBuy = (e) => {
         e.preventDefault();
+        console.log(stocks);
         fetchQuote(state.ticker)
         .then( quote => {
             console.log(quote);
@@ -52,8 +53,26 @@ const Portfolio = () => {
         });
     }
 
+    const lis = Object.values(stocks).filter(stock => stock.owner_id === currentUser.id).map( (stock) => {
+        return(
+            <li key={stock.id}>
+                <span>{stock.ticker}</span>
+                <span>{stock.shares} Shares</span>
+            </li>
+        );
+    });
+
+
     return(
         <section id="portfolio-container">
+
+            <section id="owned-stocks-container">
+
+                <ul>
+                    {lis}
+                </ul>
+
+            </section>
 
             <section id="purchase-container">
             <header>${currentUser.balance}</header>

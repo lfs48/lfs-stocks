@@ -10,7 +10,7 @@ const App = () => (
     <main id="app-container">
         <Navbar/>
         <ProtectedRoute path="/transactions" component={Transactions} />
-        <ProtectedRoute path="/" component={Portfolio} />
+        <ProtectedRoute path="/portfolio" component={Portfolio} />
         <AuthRoute path="/" component={Splash} />
     </main>
 );

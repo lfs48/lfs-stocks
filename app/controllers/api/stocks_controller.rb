@@ -16,11 +16,11 @@ class Api::StocksController < ApplicationController
         end
     end
 
-    # Looks up stock by id from params, then renders api/stocks/show view if a stock with that id is found
-    def show
-        @stock = Stock.find_by(id: params[:id])
-        render "api/stocks/show" if @stock
-    end
+    # # Looks up stock by id from params, then renders api/stocks/show view if a stock with that id is found
+    # def show
+    #     @stock = Stock.find_by(id: params[:id])
+    #     render "api/stocks/show" if @stock
+    # end
 
     private
 

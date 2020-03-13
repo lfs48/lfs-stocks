@@ -1,6 +1,6 @@
 class Api::StocksController < ApplicationController
 
-    # Retrieves all users from db, then renders api/users/index view
+    # Retrieves all stocks owned by user from db, then renders api/stocks/index view
     def index
         @stocks = Stock.where(:owner_id => params[:user_id])
         render "api/stocks/index"
@@ -15,12 +15,6 @@ class Api::StocksController < ApplicationController
             render json: @stock.errors.full_messages, status: 422
         end
     end
-
-    # # Looks up stock by id from params, then renders api/stocks/show view if a stock with that id is found
-    # def show
-    #     @stock = Stock.find_by(id: params[:id])
-    #     render "api/stocks/show" if @stock
-    # end
 
     private
 

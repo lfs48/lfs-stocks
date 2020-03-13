@@ -1,13 +1,13 @@
 import React from 'react';
 import App from './App';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 const Root = ({store}) => (
     <Provider store={store}>
-        <BrowserRouter>
+        <HashRouter>
             <App></App>
-        </BrowserRouter>
+        </HashRouter>
     </Provider>
 );
 

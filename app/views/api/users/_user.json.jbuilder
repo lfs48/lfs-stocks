@@ -6,4 +6,8 @@ if logged_in? && user.id == current_user.id
     json.ownedStockIds do
         json.array! user.owned_stocks.map { |stock| stock.id }
     end
+
+    json.transactionIds do
+        json.array! user.transactions.map { |transaction| transaction.id }
+    end
 end

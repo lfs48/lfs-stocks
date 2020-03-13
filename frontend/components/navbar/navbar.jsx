@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {login, logout} from '../../actions/sessions/sessions_actions';
 import {merge} from 'lodash';
 
@@ -55,6 +56,8 @@ const Navbar = () => {
         <> 
         <span>Welcome, {currentUser.email}</span>
         <button onClick={e => handleLogout(e)}>Log Out</button>
+        <Link to="/portfolio">Portfolio</Link>
+        <Link to="/transactions">Transactions</Link>
         </>
     } else {
         content = 

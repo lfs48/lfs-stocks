@@ -8,6 +8,11 @@ class User < ApplicationRecord
 
     attr_reader :password
 
+    has_many :owned_stocks,
+        class_name: :Stock,
+        primary_key: :id,
+        foreign_key: :owner_id
+
     # Looks up user in db by email, then validates provided password
     def self.find_by_credentials(email, password)
         user = User.find_by(email: email)

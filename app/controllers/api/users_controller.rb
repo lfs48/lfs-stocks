@@ -9,6 +9,7 @@ class Api::UsersController < ApplicationController
     # Creates a user object from filtered params, then logs user in and renders api/users/show view if successfully persists to db, or renders errors otherwise
     def create
         @user = User.new(user_params)
+        @user.balance = 5000
         if @user.save
             log_user_in!(@user)
             render "api/users/show"

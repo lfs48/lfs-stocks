@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-    after_initialize :ensure_session_token
+    after_initialize :ensure_session_token, :initialize_balance
 
     validates :email, :password_digest, :session_token, presence: true
     validates :email, :session_token, uniqueness: true
@@ -52,6 +52,10 @@ class User < ApplicationRecord
     def is_password?(password)
         digest = BCrypt::Password.new(self.password_digest)
         return digest.is_password?(password)
+    end
+
+    def initialize_balance
+        self.balance = 5000.00
     end
 
 end

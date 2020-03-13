@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {merge} from 'lodash';
 import {fetchQuote} from '../../util/api/stocks_api_util';
+import {fetchUser} from '../../actions/entities/user_actions';
 import {fetchUserStocks} from '../../actions/entities/stock_actions';
-import {createTransaction} from '../../actions/entities/transaction_actions';
+import {createTransaction} from '../../actions/entities/transaction_actions'
 
 const Portfolio = () => {
 
@@ -44,7 +45,10 @@ const Portfolio = () => {
                 quantity: state.quantity,
                 price: quote.latestPrice
             };
-            dispatch(createTransaction(transaction));
+            dispatch(createTransaction(transaction))
+            .then( () =>
+                dispatch(fetchUser(currentUser.id))
+            );
         });
     }
 

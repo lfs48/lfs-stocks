@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-    after_initialize :ensure_session_token, :initialize_balance
+    after_initialize :ensure_session_token
 
     validates :email, :password_digest, :session_token, presence: true
     validates :email, :session_token, uniqueness: true
@@ -12,6 +12,11 @@ class User < ApplicationRecord
         class_name: :Stock,
         primary_key: :id,
         foreign_key: :owner_id
+
+    has_many :transactions,
+        class_name: :Transaction,
+        primary_key: :id,
+        foreign_key: :purchaser_id
 
     # Looks up user in db by email, then validates provided password
     def self.find_by_credentials(email, password)
@@ -59,8 +64,25 @@ class User < ApplicationRecord
         return digest.is_password?(password)
     end
 
-    def initialize_balance
-        self.balance = 5000.00
+    def can_afford(transaction)
+        return self.balance >= transaction.price * transaction.quantity
+    end
+
+    def buy(transaction)
+        if ( self.can_afford(transaction) )
+            self.balance -= transaction.price * transaction.quantity
+            self.save!
+            stock = Stock.find_by(ticker: transaction.ticker, owner_id: self.id)
+            if stock
+                stock.update_shares(transaction.quantity)
+            else
+                stock_params = {owner_id: self.id, shares: transaction.quantity, ticker: transaction.ticker}
+                stock = Stock.new(stock_params)
+                stock.save!
+            end
+        else
+            raise 'Insufficient funds'
+        end
     end
 
 end

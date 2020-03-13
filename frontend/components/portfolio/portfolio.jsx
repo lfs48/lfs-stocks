@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {merge} from 'lodash';
 import {fetchQuote} from '../../util/api/stocks_api_util';
-import {fetchUserStocks, createStock} from '../../actions/entities/stock_actions';
+import {fetchUserStocks} from '../../actions/entities/stock_actions';
+import {createTransaction} from '../../actions/entities/transaction_actions';
 
 const Portfolio = () => {
 
@@ -36,12 +37,14 @@ const Portfolio = () => {
         e.preventDefault();
         fetchQuote(state.ticker)
         .then( quote => {
-            const stock = {
-                owner_id: currentUser.id,
+            console.log(quote);
+            const transaction = {
+                purchaser_id: currentUser.id,
                 ticker: state.ticker,
-                shares: state.quantity
+                quantity: state.quantity,
+                price: quote.latestPrice
             };
-            dispatch(createStock(stock));
+            dispatch(createTransaction(transaction));
         });
     }
 

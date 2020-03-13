@@ -8,4 +8,8 @@ class Stock < ApplicationRecord
         primary_key: :id,
         foreign_key: :owner_id
 
+    def update_shares(quantity)
+        self.shares += quantity
+        self.save
+    end
 end

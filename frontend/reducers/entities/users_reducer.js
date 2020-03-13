@@ -1,5 +1,5 @@
 import { merge } from 'lodash';
-import {RECEIVE_USER, RECEIVE_ALL_USERS, LOGIN_USER, RECEIVE_STOCK} from '../../actions/types';
+import {RECEIVE_USER, RECEIVE_ALL_USERS, LOGIN_USER, RECEIVE_STOCK, RECEIVE_TRANSACTION} from '../../actions/types';
 
 const usersReducer = (state = {}, action) => {
     // Copy of state is created and state is frozen to ensure this function does not create side effects
@@ -25,6 +25,14 @@ const usersReducer = (state = {}, action) => {
         case(RECEIVE_STOCK): {
             if (action.stock.owner_id in newState) {
                 newState[action.stock.owner_id].ownedStockIds.push(action.stock.id);
+            };
+            return newState;
+
+        }
+
+        case(RECEIVE_TRANSACTION): {
+            if (action.transaction.purchaser_id in newState) {
+                newState[action.transaction.purchaser_id].transactionIds.push(action.transaction.id);
             };
             return newState;
 

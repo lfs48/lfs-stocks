@@ -22,7 +22,7 @@ const Transactions = () => {
         return(
             <li key={transaction.id}>
                 <span>BUY {transaction.ticker}</span>
-                <span>{transaction.shares} Shares @ {transaction.price}</span>
+                <span>{transaction.quantity} Shares @ {transaction.price}</span>
             </li>
         );
     });

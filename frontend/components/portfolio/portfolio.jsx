@@ -49,6 +49,9 @@ const Portfolio = () => {
             dispatch(createTransaction(transaction))
             .then( () =>
                 dispatch(fetchUser(currentUser.id))
+            )
+            .then( () =>
+                dispatch(fetchUserStocks(currentUser.id))
             );
         });
     }

@@ -1,16 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {login, logout} from '../../actions/sessions/sessions_actions';
-import {merge} from 'lodash';
+import {logout} from '../../actions/sessions/sessions_actions';
 
 const Navbar = () => {
-
-    // Set react state.
-    const [state, setState] = useState({
-        email: "",
-        password: ""
-    });
 
     const dispatch = useDispatch();
 
@@ -21,24 +14,6 @@ const Navbar = () => {
             currentUser: state.entities.users[state.sessions.id]
         })
     );
-
-    // Controls input fields by updating react state.
-    const updateInput = (e, field) => {
-        e.preventDefault();
-        const newState = merge({}, state);
-        newState[field] = e.target.value;
-        setState(newState);
-    }
-
-    // Handles login button by dispatching a login action, using info from react state to build user object.
-    const handleLogin = (e) => {
-        e.preventDefault();
-        const user = {
-            email: state.email,
-            password: state.password
-        };
-        dispatch(login(user));
-    }
 
     // Handles logout button by dispatching a logout action.
     const handleLogout = (e) => {
@@ -62,23 +37,6 @@ const Navbar = () => {
     } else {
         content = 
         <>
-        <input 
-            type="text" 
-            id="nav-email-input" 
-            placeholder="Email"
-            value={state.email}
-            onChange={e => updateInput(e, "email")}
-        ></input>
-
-        <input 
-            type="password" 
-            id="nav-password-input" 
-            placeholder="Password"
-            value={state.password}
-            onChange={e => updateInput(e, "password")}
-        ></input>
-
-        <button id="nav-login-button" onClick={e => handleLogin(e)}>Log In</button>
         </>
     }
 

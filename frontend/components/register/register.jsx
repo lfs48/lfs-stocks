@@ -32,8 +32,9 @@ const Register = () => {
     }
 
     return(
-        <section id="register-container">
-            <header>New User? Register An Account!</header>
+        <section id="register-container" className="login-register">
+            <div>
+            <header>Register</header>
 
             <input 
                 type="text" 
@@ -54,7 +55,7 @@ const Register = () => {
             <button onClick={e => handleRegister(e)}>Register</button>
 
             <Link to="/login">Have an Account? Log In Here</Link>
-
+            </div>
         </section>
     )
 }

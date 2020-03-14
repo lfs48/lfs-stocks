@@ -32,7 +32,8 @@ const Login = () => {
     }
 
     return(
-        <section id="login-container">
+        <section id="login-container" className="login-register">
+            <div>
             <header>Log In</header>
 
             <input 
@@ -54,6 +55,7 @@ const Login = () => {
             <button onClick={e => handleLogin(e)}>Log In</button>
 
             <Link to="/register">New User? Register Here</Link>
+            </div>
         </section>
     )
 }

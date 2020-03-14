@@ -5,8 +5,9 @@ const Splash = () => {
 
     return(
         <section id="splash-container">
-            <Link to="/login">Log In</Link>
-            <Link to="register">Register</Link>
+            <header>LFS Stocks</header>
+            <Link className="splash-link" to="/login">Log In</Link>
+            <Link className="splash-link" to="register">Register</Link>
         </section>
     )
 

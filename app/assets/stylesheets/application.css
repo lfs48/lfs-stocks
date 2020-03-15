@@ -89,20 +89,75 @@
     }
 
     .login-register button {
-        border: none;
+        border: 3px solid #212121;
         border-radius: 3px;
         background: #5297ac;
         font-size: 1em;
         color: #d4d9dd;
         margin-top: 1.5em;
         padding: 0.5em 1em;
+        font-weight: bolder;
     }
 
     .login-register a {
         margin: 2em 0;
     }
 
+/* Portfolio */
 
+    #portfolio-container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 10%;
+    }
+
+    #portfolio-divider {
+        height: 60vh;
+        min-height: 500px;
+        border-left: 3px solid #212121;
+        border-radius: 20px;
+    }
+
+    #portfolio-container header {
+        margin-bottom: 2em;
+        font-size: 2em;
+        font-weight: bolder;
+    }
+
+    #owned-stocks-container, #purchase-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        height: 35em;
+    }
+
+    #owned-stocks-container li {
+        border-bottom: 3px solid #212121;
+        border-radius: 2px;
+        margin-bottom: 1em;
+        padding: 0.5em 1em;
+        font-size: 1.2em;
+    }
+
+    #purchase-container input {
+        border: 3px solid #212121;
+        border-radius: 3px;
+        margin-bottom: 2em;
+        padding: 0.75em 1em;
+        font-size: 1em;
+    }
+
+    #purchase-container button {
+        border: 3px solid #212121;
+        border-radius: 3px;
+        background: #5297ac;
+        font-size: 1em;
+        color: #d4d9dd;
+        margin-top: 1.5em;
+        padding: 0.5em 1em;
+        font-weight: bolder;
+    }
 
 /* Reset */
 

@@ -143,7 +143,7 @@
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        margin-top: 10%;
+        margin-top: 5%;
     }
 
     #portfolio-divider {
@@ -166,12 +166,19 @@
         height: 35em;
     }
 
-    #owned-stocks-container li {
+    .stock-li {
         border-bottom: 3px solid #212121;
         border-radius: 2px;
         margin-bottom: 1em;
-        padding: 0.5em 1em;
+        padding: 0.5em 0;
         font-size: 1.2em;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #purchase-container .stock-li {
+        display: flex;
+        justify-content: space-between;
     }
 
     #purchase-container input {
@@ -191,6 +198,23 @@
         margin-top: 1.5em;
         padding: 0.5em 1em;
         font-weight: bolder;
+    }
+
+/* Transactions */
+
+    #transactions-container {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        margin-left: 5%;
+        width: 21em;
+        margin-top: 5%;
+    }
+
+    #transactions-container header {
+        font-size: 2em;
+        font-weight: bolder;
+        margin-bottom: 2em;
     }
 
 /* Reset */

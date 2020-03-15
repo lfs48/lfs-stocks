@@ -59,8 +59,7 @@ const Portfolio = () => {
     const lis = Object.values(stocks).filter(stock => stock.owner_id === currentUser.id).map( (stock) => {
         return(
             <li key={stock.id}>
-                <span>{stock.ticker}</span>
-                <span>{stock.shares} Shares</span>
+                <span>{stock.ticker} — {stock.shares} Shares</span>
             </li>
         );
     });
@@ -71,14 +70,20 @@ const Portfolio = () => {
 
             <section id="owned-stocks-container">
 
+                <header>Portfolio ($???)</header>
+
                 <ul>
                     {lis}
                 </ul>
 
             </section>
 
+            <div id="portfolio-divider"></div>
+
             <section id="purchase-container">
-            <header>${currentUser.balance}</header>
+            
+            <header>Cash — ${currentUser.balance}</header>
+
             <input 
                 type="text" 
                 id="ticker-input" 
@@ -86,6 +91,8 @@ const Portfolio = () => {
                 value={state.ticker}
                 onChange={e => updateInput(e, "ticker")}
             ></input>
+
+            
 
             <input 
                 type="number" 

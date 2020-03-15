@@ -28,12 +28,19 @@ const Navbar = () => {
     // When not logged in, render login input fields.
     if (loggedIn) {
         content = 
-        <> 
-        <span>Welcome, {currentUser.email}</span>
-        <button onClick={e => handleLogout(e)}>Log Out</button>
-        <Link to="/portfolio">Portfolio</Link>
-        <Link to="/transactions">Transactions</Link>
-        </>
+        <nav id="nav-container">
+        <section>
+            <span className="nav-content">{currentUser.email}</span>
+            <button id="logout-button" className="nav-content" onClick={e => handleLogout(e)}>Log Out</button>
+        </section>
+
+        <section id="nav-links">
+            <Link className="nav-content" to="/portfolio">Portfolio</Link>
+            <div id="nav-links-divider"></div>
+            <Link className="nav-content" to="/transactions">Transactions</Link>
+        </section>
+        
+        </nav>
     } else {
         content = 
         <>
@@ -41,9 +48,9 @@ const Navbar = () => {
     }
 
     return (
-        <nav id="nav-container">
+        <>
             {content}
-        </nav>
+        </>
     );
 }
 

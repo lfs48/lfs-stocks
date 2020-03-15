@@ -32,6 +32,40 @@
         color: #5297ac;
     }
 
+/* Navbar */
+
+    #nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1em;
+        border-bottom: 3px solid #d4d9dd;
+    }
+
+    .nav-content {
+        margin: 0 0.5em;
+    }
+
+    #nav-container section {
+        display: flex;
+        align-items: center;
+    }
+
+    #nav-links-divider {
+        border-left: 2.5px solid #212121;
+        height: 1.2em;
+    }
+
+    #logout-button {
+        border: 2px solid #212121;
+        border-radius: 2px;
+        background: #af3039;
+        font-size: 0.75em;
+        color: #d4d9dd;
+        padding: 0.5em 1em;
+        font-weight: bolder;
+    }
+
  /* Splash */
 
     #splash-container {

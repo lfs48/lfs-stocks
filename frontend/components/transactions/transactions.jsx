@@ -20,9 +20,8 @@ const Transactions = () => {
 
     const lis = Object.values(transactions).filter(transaction => transaction.purchaser_id === currentUser.id).map( (transaction) => {
         return(
-            <li key={transaction.id}>
-                <span>BUY {transaction.ticker}</span>
-                <span>{transaction.quantity} Shares @ {transaction.price}</span>
+            <li className="stock-li" key={transaction.id}>
+                <span>BUY {transaction.ticker} — {transaction.quantity} Shares @ {transaction.price}</span>
             </li>
         );
     });
@@ -30,6 +29,8 @@ const Transactions = () => {
 
     return(
         <section id="transactions-container">
+
+            <header>Transactions</header>
 
             <ul>
                 {lis}

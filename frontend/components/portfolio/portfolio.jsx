@@ -58,8 +58,9 @@ const Portfolio = () => {
 
     const lis = Object.values(stocks).filter(stock => stock.owner_id === currentUser.id).map( (stock) => {
         return(
-            <li key={stock.id}>
+            <li className="stock-li" key={stock.id}>
                 <span>{stock.ticker} — {stock.shares} Shares</span>
+                <span>$???</span>
             </li>
         );
     });

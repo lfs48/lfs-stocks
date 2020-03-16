@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {useInterval} from '../../util/hooks/hooks';
 import {merge} from 'lodash';
-import {fetchQuote} from '../../util/api/stocks_api_util';
+import {fetchQuote, fetchBatch} from '../../util/api/stocks_api_util';
 import {fetchUser} from '../../actions/entities/user_actions';
 import {fetchUserStocks} from '../../actions/entities/stock_actions';
 import {createTransaction} from '../../actions/entities/transaction_actions'
@@ -13,25 +14,51 @@ const Portfolio = () => {
         quantity: "",
     });
 
+    const [stockState, setStockState] = useState({});
+
+    const [update, doUpdate] = useState(0);
+
+    useInterval( () => {
+        doUpdate(update+1)
+    }, 500);
+
     const dispatch = useDispatch();
 
     const {stocks, currentUser} = useSelector(
         state => ({
             currentUser: state.entities.users[state.sessions.id],
-            stocks: state.entities.stocks
+            stocks: Object.values(state.entities.stocks) || []
         })
-    )
+    );
 
     useEffect( () => {
         dispatch(fetchUserStocks(currentUser.id))
     },
     []);
 
+    useEffect( () => {
+        fetchBatch(stocks)
+        .then( (res) => {
+            const stocksArr = [];
+            Object.values(res).forEach( (stock) => stocksArr.push({ticker: stock.quote.symbol, open: stock.quote.open, price: stock.quote.latestPrice}) );
+            updateStocks(stocksArr);
+        })
+    },
+    [update]);
+
     const updateInput = (e, field) => {
         e.preventDefault();
         const newState = merge({}, state);
         newState[field] = e.target.value;
         setState(newState);
+    }
+
+    const updateStocks = (stocksArr) => {
+        const newState = merge({}, stockState);
+        stocksArr.forEach( (stock) =>
+            newState[stock.ticker] = {open: stock.open, price: stock.price}
+        );
+        setStockState(newState);
     }
 
     const handleBuy = (e) => {
@@ -56,11 +83,11 @@ const Portfolio = () => {
         });
     }
 
-    const lis = Object.values(stocks).filter(stock => stock.owner_id === currentUser.id).map( (stock) => {
+    const lis = stocks.filter(stock => stock.owner_id === currentUser.id).map( (stock) => {
         return(
             <li className="stock-li" key={stock.id}>
                 <span>{stock.ticker} — {stock.shares} Shares</span>
-                <span>$???</span>
+                <span>{ stock.ticker in stockState ? `$${stockState[stock.ticker].price}` : "$?"}</span>
             </li>
         );
     });

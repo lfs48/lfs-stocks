@@ -176,9 +176,10 @@
         justify-content: space-between;
     }
 
-    #purchase-container .stock-li {
+    .stock-li {
         display: flex;
         justify-content: space-between;
+        font-weight: bolder;
     }
 
     #purchase-container input {
@@ -198,6 +199,14 @@
         margin-top: 1.5em;
         padding: 0.5em 1em;
         font-weight: bolder;
+    }
+
+    .upStock {
+        color: red;
+    }
+
+    .downStock {
+        color: green;
     }
 
 /* Transactions */

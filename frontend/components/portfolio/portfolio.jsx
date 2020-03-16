@@ -14,13 +14,15 @@ const Portfolio = () => {
         quantity: "",
     });
 
+    const [value, setValue] = useState(0);
+
     const [stockState, setStockState] = useState({});
 
     const [update, doUpdate] = useState(0);
 
     useInterval( () => {
         doUpdate(update+1)
-    }, 500);
+    }, 1000);
 
     const dispatch = useDispatch();
 
@@ -42,6 +44,9 @@ const Portfolio = () => {
             const stocksArr = [];
             Object.values(res).forEach( (stock) => stocksArr.push({ticker: stock.quote.symbol, open: stock.quote.open, price: stock.quote.latestPrice}) );
             updateStocks(stocksArr);
+            let value = stocksArr.reduce( (acc, stock) => acc + stock.price , 0 );
+            value = value.toFixed(2);
+            setValue(value);
         })
     },
     [update]);
@@ -98,7 +103,7 @@ const Portfolio = () => {
 
             <section id="owned-stocks-container">
 
-                <header>Portfolio ($???)</header>
+            <header>Portfolio ${value}</header>
 
                 <ul>
                     {lis}
